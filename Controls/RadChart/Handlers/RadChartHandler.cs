@@ -1,6 +1,7 @@
 ﻿using AndroidX.AppCompat.Widget;
 using Microsoft.Maui;
 using Microsoft.Maui.Handlers;
+using System;
 using System.ComponentModel;
 
 namespace HelloMaui
@@ -28,12 +29,16 @@ namespace HelloMaui
 		{
 			base.ConnectHandler(nativeView);
 
+			NativeView.Click += OnCrosshairMoved;
+
 			AttachEvents();
 		}
 
 		protected override void DisconnectHandler(AppCompatButton nativeView)
 		{
 			DetachEvents();
+
+			NativeView.Click -= OnCrosshairMoved;
 
 			base.DisconnectHandler(nativeView);
 		}
@@ -72,13 +77,19 @@ namespace HelloMaui
 		{
 			if (currentSettings is ICrosshairSettings settings)
 			{
-				currentSettings.PropertyChanged -= OnCroshairPropertyChanged;
+				settings.PropertyChanged -= OnCroshairPropertyChanged;
+				currentSettings = null;
 			}
 		}
 
 		private void OnCroshairPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			MapCrosshairSettings(this, currentSettings);
+		}
+
+		private void OnCrosshairMoved(object sender, EventArgs e)
+		{
+			currentSettings?.OnCrosshairMoved();
 		}
 	}
 }

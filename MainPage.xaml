@@ -11,7 +11,7 @@
             <Button Text="Swap Crosshair Object" Clicked="OnSwapCrosshairObjectClicked" />
             <Button Text="Swap Crosshair Color" Clicked="OnSwapCrosshairColorClicked" />
 
-            <Label Text="..." x:Name="movedLabel" />
+            <Label Text="click the button below to pretend the crosshair is moving" x:Name="movedLabel" />
 
             <local:RadChart x:Name="chart" />
 

@@ -13,6 +13,8 @@ namespace HelloMaui
 		public MainPage()
 		{
 			InitializeComponent();
+
+			chart.Crosshair.CrosshairMoved += OnCroshairMoved;
 		}
 
 		private void OnSwapMainColorClicked(object sender, EventArgs e)
